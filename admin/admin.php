@@ -3,7 +3,7 @@
 $server = "localhost";
 $user = "root";
 $password = "";
-$db = "tunisair";
+$db = "users";
 $conn = mysqli_connect($server,$user,$password,$db);
 // if($conn){
 // echo 'Connection Successfully';
@@ -11,6 +11,4 @@ $conn = mysqli_connect($server,$user,$password,$db);
 // }else{
 //     echo 'Not Connected';
 // }
-
-
 ?>
