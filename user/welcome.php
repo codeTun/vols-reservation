@@ -21,7 +21,14 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link btn btn-primary text-white" href="#" data-toggle="modal" data-target="#addEmployeeModal">Resérvation</a>
+                        <a class="nav-link btn btn-primary text-white mx-2" href="#" data-toggle="modal" data-target="#addEmployeeModal">Resérvation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-white mx-2" href="loginUser.php">Login</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-white mx-2" href="register.php" >Register</a>
                     </li>
                 </ul>
             </div>
@@ -50,7 +57,6 @@
                 <div class="col-md-2 col-4">
                     <img src="turkish.png" alt="Sponsor 3" class="img-fluid mb-4">
                 </div>
-                
             </div>
         </div>
     </section>
@@ -78,10 +84,6 @@
                             <input type="text" name="passenger_phone" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label>Numéro de vol</label>
-                            <input type="text" name="flight_number" class="form-control" required>
-                        </div>
-                        <div class="form-group">
                             <label>Ville de départ</label>
                             <input type="text" name="departure_city" class="form-control" required>
                         </div>
@@ -96,19 +98,7 @@
                         <div class="form-group">
                             <label>Date d'arrivée</label>
                             <input type="date" name="arrival_date" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Numéro de siège</label>
-                            <input type="text" name="seat_number" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Statut</label>
-                            <select name="reservation_status" class="form-control">
-                                <option value="Confirmed">Confirmé</option>
-                                <option value="Pending">encours</option>
-                                <option value="Cancelled">Annulé</option>
-                            </select>
-                        </div>					
+                        </div>				
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Annuler">
@@ -118,11 +108,12 @@
             </div>
         </div>
     </div>
+    
 
     <!-- Footer -->
     <footer class="footer bg-dark text-white text-center py-3">
         <div class="container">
-            <p>&copy; 2023 Agence de Voyage. All rights reserved.</p>
+            <p>&copy; 2024 Agence de Voyage. All rights reserved.</p>
             <p>
                 <a href="#" class="text-white mx-2"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
