@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Récupérer les utilisateurs
-$sql = "SELECT id, username, email FROM users";
+$sql = "SELECT id, username, email FROM guest";
 $result = $conn->query($sql);
 ?>
 
