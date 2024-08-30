@@ -122,11 +122,18 @@ if(isset($_POST['submit'])){
                 </div>					
             </div>
             <div class="modal-footer">
-                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                <input type="button" class="btn btn-default" onclick="redirectToIndex()" value="Cancel">
                 <input type="submit" name="submit" class="btn btn-info" value="Save">
             </div>
         </form>
     </div>
 </div>
+
+<script>
+function redirectToIndex() {
+    window.location.replace("index.php");
+}
+</script>
+
 </body>
 </html>

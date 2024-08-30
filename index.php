@@ -26,7 +26,7 @@ body {
     background: #fff;
     padding: 20px 25px;
     border-radius: 3px;
-    min-width: 800px; /* Reduced from 1000px */
+    min-width: 900px; 
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }
 .table-title {        
@@ -67,11 +67,11 @@ body {
 }
 table.table tr th, table.table tr td {
     border-color: #e9e9e9;
-    padding: 12px 15px;
+    padding: 12px 10px;
     vertical-align: middle;
 }
 table.table tr th:first-child {
-    width: 200px;
+    width: 250px;
 }
 table.table tr th:last-child {
     width: 150px; /* Increased width for actions */
@@ -92,6 +92,7 @@ table.table td:last-child i {
     font-size: 22px;
     margin: 0 5px;
 }
+
 table.table td a {
     font-weight: bold;
     color: #566787;
@@ -111,6 +112,7 @@ table.table td a.delete {
 table.table td i {
     font-size: 19px;
 }
+
 table.table .avatar {
     border-radius: 50%;
     vertical-align: middle;
@@ -244,6 +246,26 @@ table.table .avatar {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: red;
 }	
+/* Status styles */
+/* Status styles */
+.status-box {
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
+    min-width: 80px;
+}
+.status-confirmed {
+    background-color: #28a745; 
+}
+.status-pending {
+    background-color: #ECB707; 
+}
+.status-cancelled {
+    background-color: #dc3545; 
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -308,31 +330,43 @@ $(document).ready(function(){
                     </tr>
                 </thead>
                 <tbody>
-            <?php
-            include 'dbconn.php';
-            $query = 'SELECT * FROM reservation_vols';
-            $mysqliquery = mysqli_query($conn, $query);
-            while ($result = mysqli_fetch_assoc($mysqliquery)) {
-                ?>
-                <tr>
-                    <td><?php echo $result['passenger_name']; ?></td>
-                    <td><?php echo $result['passenger_email']; ?></td>
-                    <td><?php echo $result['passenger_phone']; ?></td>
-                    <td><?php echo $result['flight_number']; ?></td>
-                    <td><?php echo $result['departure_city']; ?></td>
-                    <td><?php echo $result['arrival_city']; ?></td>
-                    <td><?php echo $result['departure_date']; ?></td>
-                    <td><?php echo $result['arrival_date']; ?></td>
-                    <td><?php echo $result['seat_number']; ?></td>
-                    <td><?php echo $result['reservation_status']; ?></td>
-                    <td>
-                        <a href="update.php?id=<?php echo $result['reservation_id']; ?>" class="edit"><i class="material-icons" data-toggle="tooltip" title="Modifier">&#xE254;</i></a>
-                        <a href="delete.php?id=<?php echo $result['reservation_id']; ?>" class="delete"><i class="material-icons" data-toggle="tooltip" title="Supprimer">&#xE872;</i></a>
-                    </td>
-                </tr>
                 <?php
-            }
-            ?>
+include 'dbconn.php';
+$query = 'SELECT * FROM reservation_vols';
+$mysqliquery = mysqli_query($conn, $query);
+while ($result = mysqli_fetch_assoc($mysqliquery)) {
+    $statusClass = '';
+    $statusText = '';
+    if ($result['reservation_status'] == 'Confirmed') {
+        $statusClass = 'status-confirmed';
+        $statusText = 'Confirmé';
+    } elseif ($result['reservation_status'] == 'Pending') {
+        $statusClass = 'status-pending';
+        $statusText = 'encours';
+    } elseif ($result['reservation_status'] == 'Cancelled') {
+        $statusClass = 'status-cancelled';
+        $statusText = 'Annulé';
+    }
+    ?>
+    <tr>
+        <td><?php echo $result['passenger_name']; ?></td>
+        <td><?php echo $result['passenger_email']; ?></td>
+        <td><?php echo $result['passenger_phone']; ?></td>
+        <td><?php echo $result['flight_number']; ?></td>
+        <td><?php echo $result['departure_city']; ?></td>
+        <td><?php echo $result['arrival_city']; ?></td>
+        <td><?php echo $result['departure_date']; ?></td>
+        <td><?php echo $result['arrival_date']; ?></td>
+        <td><?php echo $result['seat_number']; ?></td>
+        <td><span class="status-box <?php echo $statusClass; ?>"><?php echo $statusText; ?></span></td>
+        <td>
+            <a href="update.php?id=<?php echo $result['reservation_id']; ?>" class="edit"><i class="material-icons" data-toggle="tooltip" title="Modifier">&#xE254;</i></a>
+            <a href="delete.php?id=<?php echo $result['reservation_id']; ?>" class="delete"><i class="material-icons" data-toggle="tooltip" title="Supprimer">&#xE872;</i></a>
+        </td>
+    </tr>
+    <?php
+}
+?>
                 </tbody>
             </table>
             
@@ -388,7 +422,7 @@ $(document).ready(function(){
                         <label>Statut</label>
                         <select name="reservation_status" class="form-control">
                             <option value="Confirmed">Confirmé</option>
-                            <option value="Pending">En attente</option>
+                            <option value="Pending">encours</option>
                             <option value="Cancelled">Annulé</option>
                         </select>
                     </div>					
@@ -452,7 +486,7 @@ $(document).ready(function(){
                         <label>Statut</label>
                         <select class="form-control">
                             <option value="Confirmed">Confirmé</option>
-                            <option value="Pending">En attente</option>
+                            <option value="Pending">encours</option>
                             <option value="Cancelled">Annulé</option>
                         </select>
                     </div>					
@@ -460,28 +494,6 @@ $(document).ready(function(){
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Annuler">
                     <input type="submit" class="btn btn-info" value="Enregistrer">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Supprimer Modal HTML -->
-<div id="deleteEmployeeModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">						
-                    <h4 class="modal-title">Supprimer les données</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">					
-                    <p>Êtes-vous sûr de vouloir supprimer ces enregistrements ?</p>
-                    <p class="text-warning"><small>Cette action ne peut pas être annulée.</small></p>
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Annuler">
-                    <input type="submit" class="btn btn-danger" value="Supprimer">
                 </div>
             </form>
         </div>
