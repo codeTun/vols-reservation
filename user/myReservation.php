@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Récupérer les utilisateurs
-$sql = "SELECT id, username, email FROM reservation_vols";
+$sql = "SELECT * FROM reservation_vols";
 $result = $conn->query($sql);
 ?>
 
@@ -60,7 +60,7 @@ $result = $conn->query($sql);
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='3'>No users found</td></tr>";
+                    echo "<tr><td colspan='3'>No reservations found</td></tr>";
                 }
                 ?>
             </tbody>
