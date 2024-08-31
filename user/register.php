@@ -26,7 +26,7 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary" href="myReservation.php">Register</button>
+            <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
 </body>
@@ -43,7 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $query = "INSERT INTO guest (fname, lname, email, password) VALUES ('$fname', '$lname', '$email', '$password')";
     if (mysqli_query($conn, $query)) {
-        echo "Registration successful!";
+        header('Location: welcome.php');
+        exit();
     } else {
         echo "Error: " . $query . "<br>" . mysqli_error($conn);
     }

@@ -64,6 +64,9 @@ $result = $conn->query($sql);
                     <li class="nav-item">
                         <a class="nav-link btn btn-primary text-white mx-2" href="#" data-toggle="modal" data-target="#addEmployeeModal">Réservation</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-danger text-white mx-2" href="welcome.php">Déconnexion</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -117,7 +120,7 @@ $result = $conn->query($sql);
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='9'>No users found</td></tr>";
+                    echo "<tr><td colspan='10'>Aucune réservation trouvée</td></tr>";
                 }
                 ?>
             </tbody>

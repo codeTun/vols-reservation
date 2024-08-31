@@ -7,6 +7,37 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="home.css">
+    <style>
+        .sponsor-logo {
+    max-width: 70%; 
+    height: auto;
+}
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        .card {
+            width: 100%;
+        }
+        .hero-section {
+            background: url('hero-background.jpg') no-repeat center center/cover;
+            color: white;
+            padding: 100px 0;
+            
+        }
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            text-shadow: 5px 5px 7px rgba(0, 0, 0, 0.5);
+        }
+        .hero-content p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-top: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -20,13 +51,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    
                     <li class="nav-item">
                         <a class="nav-link btn btn-primary text-white mx-2" href="loginUser.php">Login</a>
                     </li>
-
                     <li class="nav-item">
-                        <a class="nav-link btn btn-primary text-white mx-2" href="register.php" >Register</a>
+                        <a class="nav-link btn btn-primary text-white mx-2" href="register.php">Register</a>
                     </li>
                 </ul>
             </div>
@@ -41,16 +70,55 @@
         </div>
     </div>
 
+    <!-- Flight Information Section -->
+    <section class="flights-section py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Actualité des Vols</h2>
+            <div class="row">
+                <div class="col-md-4 d-flex align-items-stretch">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="france.jpg" class="card-img-top" alt="Flight 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Vol Paris - New York</h5>
+                            <p class="card-text">Départ: 10:00 AM, 25 Dec 2024</p>
+                            <p class="card-text">Arrivée: 01:00 PM, 25 Dec 2024</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex align-items-stretch">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="londres.jpg" class="card-img-top" alt="Flight 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Vol Londres - Paris</h5>
+                            <p class="card-text">Départ: 08:00 AM, 26 Dec 2024</p>
+                            <p class="card-text">Arrivée: 11:00 PM, 26 Dec 2024</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex align-items-stretch">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="emirate.jpg" class="card-img-top" alt="Flight 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Vol Emirates - Singapour</h5>
+                            <p class="card-text">Départ: 09:00 PM, 27 Dec 2024</p>
+                            <p class="card-text">Arrivée: 05:00 AM, 28 Dec 2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Sponsors Section -->
     <section class="sponsors py-5">
         <div class="container text-center">
             <h2>Nos Sponsors</h2>
             <div class="row justify-content-center">
+            <div class="col-md-2 col-4">
+    <img src="facebook.png" alt="Sponsor 1" class="img-fluid mb-4 sponsor-logo">
+</div>
                 <div class="col-md-2 col-4">
-                    <img src="faccebook.png" alt="Sponsor 1" class="img-fluid mb-4">
-                </div>
-                <div class="col-md-2 col-4">
-                    <img src="amazone.png" alt="Sponsor 2" class="img-fluid mb-4">
+                    <img src="amazon.png" alt="Sponsor 2" class="img-fluid mb-4">
                 </div>
                 <div class="col-md-2 col-4">
                     <img src="turkish.png" alt="Sponsor 3" class="img-fluid mb-4">
@@ -107,11 +175,10 @@
         </div>
     </div>
     
-
     <!-- Footer -->
     <footer class="footer bg-dark text-white text-center py-3">
         <div class="container">
-            <p>&copy; 2024 Agence de Voyage. All rights reserved.</p>
+            <p>&copy; 2024 Elazheri Iheb. All rights reserved.</p>
             <p>
                 <a href="#" class="text-white mx-2"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
