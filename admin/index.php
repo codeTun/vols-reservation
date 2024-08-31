@@ -93,6 +93,10 @@ while ($result = mysqli_fetch_assoc($mysqliquery)) {
         $statusClass = 'status-cancelled';
         $statusText = 'Annulé';
     }
+    elseif ($result['reservation_status'] == '') {
+        $statusClass = 'status-pending';
+        $statusText = 'encours';
+    }
     ?>
     <tr>
         <td><?php echo $result['passenger_name']; ?></td>

@@ -12,6 +12,30 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Handle form submission
+if (isset($_POST['submit'])) {
+    $passenger_name = $_POST['passenger_name'];
+    $passenger_email = $_POST['passenger_email'];
+    $passenger_phone = $_POST['passenger_phone'];
+    $departure_city = $_POST['departure_city'];
+    $arrival_city = $_POST['arrival_city'];
+    $departure_date = $_POST['departure_date'];
+    $arrival_date = $_POST['arrival_date'];
+
+    $sql = "INSERT INTO reservation_vols (passenger_name, passenger_email, passenger_phone, departure_city, arrival_city, departure_date, arrival_date) 
+            VALUES ('$passenger_name', '$passenger_email', '$passenger_phone', '$departure_city', '$arrival_city', '$departure_date', '$arrival_date')";
+
+    if ($conn->query($sql) === TRUE) {
+        // Redirect with success status
+        header("Location: myReservation.php?status=success");
+        exit;
+    } else {
+        // Redirect with error status
+        header("Location: myReservation.php?status=error");
+        exit;
+    }
+}
+
 // Récupérer les utilisateurs
 $sql = "SELECT * FROM reservation_vols";
 $result = $conn->query($sql);
@@ -26,9 +50,26 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="my-4">Welcome</h1>
-        
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <h1 class="my-4 text-dark">Welcome</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-white mx-2" href="#" data-toggle="modal" data-target="#addEmployeeModal">Réservation</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container"> 
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -41,6 +82,7 @@ $result = $conn->query($sql);
                     <th>Date de départ</th>
                     <th>Date d'arrivée</th>
                     <th>Numéro de siège</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,6 +90,19 @@ $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
                     // Afficher les utilisateurs
                     while($row = $result->fetch_assoc()) {
+                        if ($row['reservation_status'] == 'Confirmed') {
+                            $statusClass = 'status-confirmed';
+                            $statusText = 'Confirmé';
+                        } elseif ($row['reservation_status'] == 'Pending') {
+                            $statusClass = 'status-pending';
+                            $statusText = 'En cours';
+                        } elseif ($row['reservation_status'] == 'Cancelled') {
+                            $statusClass = 'status-cancelled';
+                            $statusText = 'Annulé';
+                        } elseif ($row['reservation_status'] == '') {
+                            $statusClass = 'status-pending';
+                            $statusText = 'En cours';
+                        }
                         echo "<tr>";
                         echo "<td>" . $row["passenger_name"] . "</td>";
                         echo "<td>" . $row["passenger_email"] . "</td>";
@@ -58,10 +113,11 @@ $result = $conn->query($sql);
                         echo "<td>" . $row["departure_date"] . "</td>";
                         echo "<td>" . $row["arrival_date"] . "</td>";
                         echo "<td>" . $row["seat_number"] . "</td>";
+                        echo "<td>" . $statusText . "</td>";
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='3'>No users found</td></tr>";
+                    echo "<tr><td colspan='9'>No users found</td></tr>";
                 }
                 ?>
             </tbody>
@@ -71,7 +127,7 @@ $result = $conn->query($sql);
     <div id="addEmployeeModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form method="POST" action="../admin/insert.php">
+                <form method="POST" action="">
                     <div class="modal-header">						
                         <h4 class="modal-title">Ajouter une réservation</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -114,6 +170,26 @@ $result = $conn->query($sql);
             </div>
         </div>
     </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('status');
+
+            if (status === 'success') {
+                alert('Réservation ajoutée avec succès!');
+                window.location.href = 'myReservation.php'; // Refresh the page
+            } else if (status === 'error') {
+                alert('Erreur lors de l\'ajout de la réservation.');
+                window.location.href = 'myReservation.php'; // Refresh the page
+            }
+        });
+    </script>
 </body>
 </html>
 

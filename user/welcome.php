@@ -20,9 +20,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-primary text-white mx-2" href="#" data-toggle="modal" data-target="#addEmployeeModal">Resérvation</a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link btn btn-primary text-white mx-2" href="loginUser.php">Login</a>
                     </li>
