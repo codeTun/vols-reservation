@@ -65,7 +65,7 @@
     <div id="addEmployeeModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form method="POST" action="insert.php">
+                <form method="POST" action="../admin/insert.php">
                     <div class="modal-header">						
                         <h4 class="modal-title">Ajouter une réservation</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -98,7 +98,7 @@
                         <div class="form-group">
                             <label>Date d'arrivée</label>
                             <input type="date" name="arrival_date" class="form-control" required>
-                        </div>				
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Annuler">
