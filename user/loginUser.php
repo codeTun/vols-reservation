@@ -18,7 +18,7 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary" href="myReservation.php">Login</button>
         </form>
     </div>
 </body>
