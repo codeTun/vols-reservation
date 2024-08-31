@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Récupérer les utilisateurs
-$sql = "SELECT id, username, email FROM reservation_vols";
+$sql = "SELECT * FROM reservation_vols";
 $result = $conn->query($sql);
 ?>
 
@@ -28,6 +28,7 @@ $result = $conn->query($sql);
 <body>
     <div class="container">
         <h1 class="my-4">Welcome</h1>
+        
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -65,6 +66,53 @@ $result = $conn->query($sql);
                 ?>
             </tbody>
         </table>
+    </div>
+    <!-- Reservation Modal -->
+    <div id="addEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="POST" action="../admin/insert.php">
+                    <div class="modal-header">						
+                        <h4 class="modal-title">Ajouter une réservation</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">					
+                        <div class="form-group">
+                            <label>Nom du passager</label>
+                            <input type="text" name="passenger_name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="passenger_email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Téléphone</label>
+                            <input type="text" name="passenger_phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Ville de départ</label>
+                            <input type="text" name="departure_city" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Ville d'arrivée</label>
+                            <input type="text" name="arrival_city" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Date de départ</label>
+                            <input type="date" name="departure_date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Date d'arrivée</label>
+                            <input type="date" name="arrival_date" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Annuler">
+                        <input type="submit" name="submit" class="btn btn-success" style="background-color: #435d7d" value="Ajouter">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>
