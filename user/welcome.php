@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="home.css">
     <style>
         .sponsor-logo {
-    max-width: 70%; 
-    height: auto;
-}
+            max-width: 70%; 
+            height: auto;
+        }
         .card-img-top {
             height: 200px;
             object-fit: cover;
@@ -20,10 +20,9 @@
             width: 100%;
         }
         .hero-section {
-            background: url('hero-background.jpg') no-repeat center center/cover;
+            background: url('img/hero-background.jpg') no-repeat center center/cover;
             color: white;
             padding: 100px 0;
-            
         }
         .hero-content h1 {
             font-size: 3rem;
@@ -35,7 +34,6 @@
             font-weight: 300;
             margin-top: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            
         }
     </style>
 </head>
@@ -44,7 +42,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../admin/logo.png" alt="Agence de Voyage Logo" height="90" width="120">
+                <img src="../img/logo.png" alt="Agence de Voyage Logo" height="90" width="120">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -77,7 +75,7 @@
             <div class="row">
                 <div class="col-md-4 d-flex align-items-stretch">
                     <div class="card mb-4 shadow-sm">
-                        <img src="france.jpg" class="card-img-top" alt="Flight 1">
+                        <img src="../img/france.jpg" class="card-img-top" alt="Flight 1">
                         <div class="card-body">
                             <h5 class="card-title">Vol Paris - New York</h5>
                             <p class="card-text">Départ: 10:00 AM, 25 Dec 2024</p>
@@ -87,7 +85,7 @@
                 </div>
                 <div class="col-md-4 d-flex align-items-stretch">
                     <div class="card mb-4 shadow-sm">
-                        <img src="londres.jpg" class="card-img-top" alt="Flight 2">
+                        <img src="../img/londres.jpg" class="card-img-top" alt="Flight 2">
                         <div class="card-body">
                             <h5 class="card-title">Vol Londres - Paris</h5>
                             <p class="card-text">Départ: 08:00 AM, 26 Dec 2024</p>
@@ -97,7 +95,7 @@
                 </div>
                 <div class="col-md-4 d-flex align-items-stretch">
                     <div class="card mb-4 shadow-sm">
-                        <img src="emirate.jpg" class="card-img-top" alt="Flight 3">
+                        <img src="../img/emirate.jpg" class="card-img-top" alt="Flight 3">
                         <div class="card-body">
                             <h5 class="card-title">Vol Emirates - Singapour</h5>
                             <p class="card-text">Départ: 09:00 PM, 27 Dec 2024</p>
@@ -113,15 +111,21 @@
     <section class="sponsors py-5">
         <div class="container text-center">
             <h2>Nos Sponsors</h2>
-            <div class="row justify-content-center">
-            <div class="col-md-2 col-4">
-    <img src="facebook.png" alt="Sponsor 1" class="img-fluid mb-4 sponsor-logo">
-</div>
-                <div class="col-md-2 col-4">
-                    <img src="amazon.png" alt="Sponsor 2" class="img-fluid mb-4">
+            <div class="row justify-content-center ">
+                <div class="col-md-2 col-4 mt-2">
+                    <img src="../img/facebook.png" alt="Facebook" class="img-fluid mb-4 sponsor-logo">
+                </div>
+                <div class="col-md-2 col-4 mb-1 ">
+                    <img src="../img/amazon.png" alt="Amazon" class="img-fluid mb-4">
                 </div>
                 <div class="col-md-2 col-4">
-                    <img src="turkish.png" alt="Sponsor 3" class="img-fluid mb-4">
+                    <img src="../img/turkish.png" alt="Turkish" class="img-fluid mb-4">
+                </div>
+                <div class="col-md-2 col-4 mt-4">
+                    <img src="../img/airfr.png" alt="AirFrance" class="img-fluid mb-4">
+                </div>
+                <div class="col-md-2 col-4 mt-4">
+                    <img src="../img/emirates.jpg" alt="Emirates" class="img-fluid mb-4">
                 </div>
             </div>
         </div>
