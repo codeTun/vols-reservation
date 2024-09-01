@@ -53,9 +53,9 @@ $(document).ready(function(){
                     <div class="col-sm-6">
                         <h2>Bienvenue à<b> TUNISAIR</b></h2>
                     </div>
-                    <div class="col-sm-6">
+                    <!-- <div class="col-sm-6">
                         <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Ajouter une nouvelle réservation</span></a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             
@@ -122,7 +122,7 @@ while ($result = mysqli_fetch_assoc($mysqliquery)) {
             
     </div>        
 </div>
-<!-- Ajouter une réservation Modal HTML -->
+<!-- Ajouter une réservation Modal HTML
 <div id="addEmployeeModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -184,7 +184,7 @@ while ($result = mysqli_fetch_assoc($mysqliquery)) {
             </form>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Modifier Modal HTML -->
 <div id="editEmployeeModal" class="modal fade">

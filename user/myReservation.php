@@ -48,6 +48,17 @@ $result = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenue</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .status-confirmed {
+            color: #00BB00;
+        }
+        .status-pending {
+            color: #EBB503;
+        }
+        .status-cancelled {
+            color: #DB0700;
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -72,8 +83,9 @@ $result = $conn->query($sql);
         </div>
     </nav>
 
-    <div class="container"> 
-        <table class="table table-bordered">
+    <div class="container">
+        <button id="downloadPdf" class="btn btn-success mb-3">Télécharger en PDF</button>
+        <table id="reservationTable" class="table table-bordered">
             <thead>
                 <tr>
                     <th>Nom du passager</th>
@@ -98,13 +110,13 @@ $result = $conn->query($sql);
                             $statusText = 'Confirmé';
                         } elseif ($row['reservation_status'] == 'Pending') {
                             $statusClass = 'status-pending';
-                            $statusText = 'En cours';
+                            $statusText = 'encours';
                         } elseif ($row['reservation_status'] == 'Cancelled') {
                             $statusClass = 'status-cancelled';
                             $statusText = 'Annulé';
                         } elseif ($row['reservation_status'] == '') {
                             $statusClass = 'status-pending';
-                            $statusText = 'En cours';
+                            $statusText = 'encours';
                         }
                         echo "<tr>";
                         echo "<td>" . $row["passenger_name"] . "</td>";
@@ -116,7 +128,7 @@ $result = $conn->query($sql);
                         echo "<td>" . $row["departure_date"] . "</td>";
                         echo "<td>" . $row["arrival_date"] . "</td>";
                         echo "<td>" . $row["seat_number"] . "</td>";
-                        echo "<td>" . $statusText . "</td>";
+                        echo "<td class='$statusClass'>" . $statusText . "</td>";
                         echo "</tr>";
                     }
                 } else {
@@ -178,6 +190,10 @@ $result = $conn->query($sql);
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <!-- html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -191,6 +207,48 @@ $result = $conn->query($sql);
                 alert('Erreur lors de l\'ajout de la réservation.');
                 window.location.href = 'myReservation.php'; // Refresh the page
             }
+
+            document.getElementById('downloadPdf').addEventListener('click', function() {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                // Add header
+                doc.setFontSize(18);
+                doc.text('Bienvenue', 105, 10, null, null, 'center');
+
+                // Add date
+                const date = new Date().toLocaleDateString();
+                doc.setFontSize(12);
+                doc.text(`Date: ${date}`, 105, 20, null, null, 'center');
+
+                html2canvas(document.querySelector("#reservationTable")).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const imgWidth = 210; // A4 width in mm
+                    const pageHeight = 295; // A4 height in mm
+                    const imgHeight = canvas.height * imgWidth / canvas.width;
+                    let heightLeft = imgHeight;
+                    let position = 30; // Start position for content
+
+                    doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+
+                    while (heightLeft >= 0) {
+                        position = heightLeft - imgHeight + 30;
+                        doc.addPage();
+                        doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                    }
+
+                    // Add footer
+                    const pageCount = doc.internal.getNumberOfPages();
+                    for (let i = 1; i <= pageCount; i++) {
+                        doc.setPage(i);
+                        doc.text('Signature: _______________', 105, 290, null, null, 'center');
+                    }
+
+                    doc.save('reservations.pdf');
+                });
+            });
         });
     </script>
 </body>
